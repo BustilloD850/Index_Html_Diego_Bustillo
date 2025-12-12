@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gráfica - Pregunta 10</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: sans-serif; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; margin: 0; background-color: #f4f4f9; }
+        .chart-container { width: 80%; max-width: 600px; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin-top: 20px; }
+        h1 { text-align: center; color: #333; margin-bottom: 20px; font-size: 1.5em; }
+        .back-button {
+            display: inline-block;
+            padding: 10px 15px;
+            margin: 20px 0;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://bustillod850.github.io/graficas.html" class="back-button">
+        ← Regresar
+    </a>
+    <div class="chart-container">
+        <h1>Distribución de Respuestas:<br>"¿Sentiste que tenías control sobre lo que podías hacer?"</h1>
+        <canvas id="pieChart10"></canvas>
+    </div>
+
+    <script>
+        const data10 = [4, 5, 3, 3, 5, 4, 3, 4, 5, 5, 4, 5, 5, 5, 4, 4, 4, 5, 4, 5];
+        const counts10 = {};
+        data10.forEach(d => { counts10[d] = (counts10[d] || 0) + 1; });
+        const labels10 = Object.keys(counts10).sort((a, b) => a - b);
+        const values10 = labels10.map(key => counts10[key]);
+
+        const ctx10 = document.getElementById('pieChart10').getContext('2d');
+        new Chart(ctx10, {
+            type: 'pie',
+            data: {
+                labels: labels10,
+                datasets: [{
+                    data: values10,
+                    backgroundColor: [
+                        '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'
+                    ],
+                    hoverBackgroundColor: [
+                        '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'top', labels: { font: { size: 14 } } },
+                    title: { display: true, text: 'Escala: 1 (Nada de control) a 5 (Control total)', font: { size: 16 } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

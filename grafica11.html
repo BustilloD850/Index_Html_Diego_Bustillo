@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gráfica - Pregunta 11</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: sans-serif; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; margin: 0; background-color: #f4f4f9; }
+        .chart-container { width: 80%; max-width: 600px; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin-top: 20px; }
+        h1 { text-align: center; color: #333; margin-bottom: 20px; font-size: 1.5em; }
+        .back-button {
+            display: inline-block;
+            padding: 10px 15px;
+            margin: 20px 0;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://bustillod850.github.io/graficas.html" class="back-button">
+        ← Regresar
+    </a>
+    <div class="chart-container">
+        <h1>Distribución de Respuestas:<br>"¿Qué tan fácil crees que sería entender un error o problema dentro de la pantalla?"</h1>
+        <canvas id="pieChart11"></canvas>
+    </div>
+
+    <script>
+        const data11 = [4, 4, 3, 3, 5, 5, 4, 1, 5, 5, 4, 3, 5, 5, 3, 4, 4, 5, 4, 3];
+        const counts11 = {};
+        data11.forEach(d => { counts11[d] = (counts11[d] || 0) + 1; });
+        const labels11 = Object.keys(counts11).sort((a, b) => a - b);
+        const values11 = labels11.map(key => counts11[key]);
+
+        const ctx11 = document.getElementById('pieChart11').getContext('2d');
+        new Chart(ctx11, {
+            type: 'pie',
+            data: {
+                labels: labels11,
+                datasets: [{
+                    data: values11,
+                    backgroundColor: [
+                        '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'
+                    ],
+                    hoverBackgroundColor: [
+                        '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'top', labels: { font: { size: 14 } } },
+                    title: { display: true, text: 'Escala: 1 (Nada fácil) a 5 (Muy fácil)', font: { size: 16 } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
